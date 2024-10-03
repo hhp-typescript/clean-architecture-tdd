@@ -3,7 +3,7 @@ import { User } from 'src/modules/user/domain';
 
 export class Enrollment {
   constructor(
-    public id: string,
+    public id: number,
     public user: User,
     public lecture: Lecture,
     public applicationDate: Date,

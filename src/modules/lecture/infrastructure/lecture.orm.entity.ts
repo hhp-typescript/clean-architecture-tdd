@@ -7,8 +7,14 @@ export class LectureOrm extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   title: string;
 
+  @Column({ name: 'lecturer_name', type: 'varchar', length: 255 })
+  lecturerName: string;
+
   @Column({ default: 30 })
   capacity: number;
+
+  @Column({ default: 0 })
+  participants: number;
 
   @Column({ type: 'timestamp' })
   date: Date;

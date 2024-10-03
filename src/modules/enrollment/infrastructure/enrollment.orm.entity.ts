@@ -13,6 +13,6 @@ export class EnrollmentOrm extends BaseEntity {
   @JoinColumn({ name: 'lecture_id' })
   lecture: LectureOrm;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({ type: 'timestamp' })
   applicationDate: Date;
 }
