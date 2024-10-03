@@ -16,7 +16,6 @@ import {
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get<string>(ENV_DB_PASSWORD_KEY));
         return {
           type: 'postgres',
           host: configService.get<string>(ENV_DB_HOST_KEY),
