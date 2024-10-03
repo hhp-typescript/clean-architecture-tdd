@@ -1,5 +1,5 @@
-export const USER_REPOSITORY = 'UserRepository';
+export const USER_REPOSITORY = 'IUserRepository';
 
-export const LECTURE_REPOSITORY = 'LectureRepository';
+export const LECTURE_REPOSITORY = 'ILectureRepository';
 
-export const APPLICATION_REPOSITORY = 'ApplicationRepository';
+export const ENROLLMENT_REPOSITORY = 'IEnrollmentRepository';

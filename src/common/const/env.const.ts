@@ -8,4 +8,4 @@ export const ENV_DB_PASSWORD_KEY = 'DB_PASSWORD';
 
 export const ENV_DB_DATABASE_KEY = 'DB_DATABASE';
 
-export const ENV_RUNTIME_KEY = 'development';
+export const ENV_RUNTIME_KEY = 'RUN_TIME';
