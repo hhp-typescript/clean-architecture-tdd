@@ -73,4 +73,38 @@ describe('service Integration - Concurrency Tests', () => {
       expect(result.reason.message).toBe('참가자 수가 초과되었습니다.');
     });
   });
+
+  // 한 사용자가 동시에 5번 신청할 때
+  it('한 사용자가 동시에 5번 신청을 시도할 때 중복 신청이 실패해야 한다', async () => {
+    const userId = 1;
+
+    // 강의 생성
+    const lecture = await entityManager.save(LectureOrm, {
+      name: 'Concurrency Test Lecture',
+      capacity: 30,
+      participants: 0,
+    });
+
+    // 5개의 동시에 수강 신청 요청을 보냄
+    const promises = [];
+    for (let i = 0; i < 5; i++) {
+      promises.push(service.enrollWithTransaction(userId, lecture));
+    }
+
+    // 모든 요청을 병렬로 처리
+    const results = await Promise.allSettled(promises);
+
+    // 성공한 요청은 1개여야 함
+    const fulfilled = results.filter((result) => result.status === 'fulfilled');
+    const rejected = results.filter((result) => result.status === 'rejected');
+
+    expect(fulfilled.length).toBe(1); // 성공한 요청은 1개여야 함
+    expect(rejected.length).toBe(4); // 중복된 4개는 실패해야 함
+
+    rejected.forEach((result) => {
+      expect(result.reason).toBeInstanceOf(ConflictException);
+      expect(result.reason.message).toBe('이미 해당 특강에 신청하셨습니다.');
+    });
+  });
+  // 2.
 });
